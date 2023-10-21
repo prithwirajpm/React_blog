@@ -2,7 +2,7 @@ import React from 'react'
 import { Container,Navbar,Nav, } from 'react-bootstrap'
 import AddBlog from './AddBlog'
 
-function Header() {
+function Header({setuploadBlogServerResponse}) {
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -11,7 +11,7 @@ function Header() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <AddBlog />
+                            <AddBlog setuploadBlogServerResponse={setuploadBlogServerResponse}/>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

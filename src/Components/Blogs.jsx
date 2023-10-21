@@ -1,8 +1,8 @@
 import React, { useEffect,useState } from 'react'
-import { Col, Row, Card } from 'react-bootstrap'
+import { Col, Row, Card, Button } from 'react-bootstrap'
 import { getAllBlog } from '../services/allAPI'
 
-function Blogs() {
+function Blogs({uploadBlogServerResponse}) {
     const [showBlog, setShowBlog] = useState([])
     const getBlogs = async () => {
         const { data } = await getAllBlog()
@@ -10,8 +10,7 @@ function Blogs() {
     }
     useEffect(() => {
         getBlogs()
-        setShowBlog(showBlog)
-    }, [])
+    }, [uploadBlogServerResponse])
     return (
         <div className='container'>
             <Row className='m-5'>
@@ -25,7 +24,7 @@ function Blogs() {
                             <Card.Body>
                                 <Card.Title>{item?.title}</Card.Title>
                                 <Card.Text>
-                                    {item.about.slice(0,150)}
+                                    {item.about.slice(0,140)}
                                 </Card.Text>
                                 <div className='d-flex justify-content-between'>
                                     <div><h5>{item?.username}</h5></div>

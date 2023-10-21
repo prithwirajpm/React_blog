@@ -4,7 +4,7 @@ import { uploadBlog } from '../services/allAPI';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function AddBlog() {
+function AddBlog({setuploadBlogServerResponse}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -21,6 +21,7 @@ function AddBlog() {
             console.log(response);
             if (response.status >= 200 && response.status < 300) {
                 // set server response
+                setuploadBlogServerResponse(response.data)
                 toast.success(`'${response.data.title}' Blog uploaded successfully`)
                 // model hide
                 // video

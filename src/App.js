@@ -1,15 +1,16 @@
-
+import { useState } from 'react';
 import './App.css';
 import Blogs from './Components/Blogs';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 
 function App() {
+  const [uploadBlogServerResponse,setuploadBlogServerResponse] = useState({})
   return (
     <div className="App">
-      <Header />
+      <Header setuploadBlogServerResponse={setuploadBlogServerResponse}/>
       <hr />
-      <Blogs />
+      <Blogs uploadBlogServerResponse={uploadBlogServerResponse}/>
       <hr />
      <Footer />
     </div>
