@@ -1,13 +1,26 @@
 import React, { useEffect,useState } from 'react'
 import { Col, Row, Card, Button } from 'react-bootstrap'
-import { getAllBlog } from '../services/allAPI'
+import { getAllBlog,DeleteABlog} from '../services/allAPI'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReadBlog from './ReadBlog';
+
 
 function Blogs({uploadBlogServerResponse}) {
     const [showBlog, setShowBlog] = useState([])
+    const [showABlog, setShowABlog] = useState([])
     const getBlogs = async () => {
         const { data } = await getAllBlog()
         setShowBlog(data)
     }
+
+    const deleteBlog = async (id)=>{
+        await DeleteABlog(id)
+        toast.error("Delete This File");
+        getBlogs()
+    }
+
+  
     useEffect(() => {
         getBlogs()
     }, [uploadBlogServerResponse])
@@ -29,8 +42,8 @@ function Blogs({uploadBlogServerResponse}) {
                                 <div className='d-flex justify-content-between'>
                                     <div><h5>{item?.username}</h5></div>
                                     <div>
-                                        <button className='btn'><i className="fa-solid fa-trash" style={{ color: '#ac0202' }}></i></button>
-                                        <button className='btn'><i class="fa-brands fa-readme" style={{ color: '#00b377' }}></i></button>
+                                        <button className='btn' onClick={()=>deleteBlog(item?.id)}><i className="fa-solid fa-trash" style={{ color: '#ac0202' }}></i></button>
+                                        <ReadBlog id={item?.id}/>
                                     </div>
                                 </div>
                             </Card.Body>
@@ -40,7 +53,11 @@ function Blogs({uploadBlogServerResponse}) {
                 </Col>
             ) : <p>Nothing To Diplay</p>}
             </Row>
-
+            <ToastContainer
+                position='top-center'
+                theme='colored'
+                autoClose={2000}
+            />
 
         </div>
     )

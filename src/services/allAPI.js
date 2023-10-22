@@ -17,3 +17,9 @@ export const getAllBlog = async ()=>{
 export const DeleteABlog = async (id)=>{
     return await commomAPI("DELETE",`${serverURL}/blog/${id}`,{})
 }
+
+// RedBlogs
+
+export const getABlog = async (id)=>{
+    return await commomAPI("GET",`${serverURL}/blog/${id}`,"")
+}
